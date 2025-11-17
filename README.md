@@ -154,6 +154,14 @@ your-skill-name/
 - Supported document formats: Markdown (.md)
 - Recommended document structure: Technical documentation, API documentation, SDK documentation
 
+### ⚠️ Document Processing Guidelines
+
+For optimal skill generation quality and performance:
+
+- **Document Count Limit**: Process **no more than 20 documents at once**. Processing too many documents simultaneously can negatively impact the model's generation quality and accuracy.
+- **Document Length Limit**: Each document should be **under 20,000 characters**. Longer documents may need to be manually split into smaller parts for best results.
+- **Quality Over Quantity**: Focus on processing smaller, well-structured batches of documents to maintain the best skill generation outcomes.
+
 ### Usage Example
 
 1. **Prepare Document Directory**

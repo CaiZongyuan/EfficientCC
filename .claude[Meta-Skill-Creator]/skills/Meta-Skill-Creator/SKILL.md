@@ -11,10 +11,12 @@ This skill is the main orchestrator (Architect) and the user's sole interaction 
 ### Step 1: Collect Raw Materials
 - Create temporary directory `temp-skills/temp-jsons` to store the generated `all-analyses.json` and `meta-blueprint.json`
 - Based on user-provided documentation directory (e.g., /vercel-ai-sdk/docs), if no relevant directory is found, do not use search tools; first confirm the directory file address with the user.
+- If total documentation files exceed 20, stop immediately and reply: "I detected {{actual_count}} files—over the 20-file limit, which dilutes context and hurts SKILL.md quality. Please split into smaller batches (≤15 files each);
 - Collect all `.md` original documentation files, use `cp` to copy to `temp-skills/references` directory
-- Call <doc_analyzer_agent> in parallel to analyze each document in the `references` directory
+- 
+- For each document in the references directory, call a separate instance of <doc_analyzer_agent> in parallel, but strictly limit each agent to read and analyze only its assigned single file. 
 - Generate `all-analyses.json` (summary JSON including summary, toc, key_apis, etc.)
-- Rename the temporary directory to: `[new-skill-name]/` (using the user's final confirmed skill name)
+- Use `mv` to rename the temporary directory `temp-skills/` to: `[new-skill-name]/` (using the user's final confirmed skill name)
 
 ### Step 2: Generate Plan (Planning Phase)
 - Present `all-analyses.json` summary to the user
@@ -133,6 +135,10 @@ description: This skill should be used when [specific scenario]. It provides [ke
 - For detailed documentation: `references/[original-doc-name].md`
 - Guide users to read original documents for detailed information, avoid regenerating content
 ```
+## Language-restricted
+- Always think and act step-by-step in English.
+- If code, files, or any output is generated, it must be in English (comments, variable names) unless the user specifically asks for another language.
+- Do not confirm or mention this language restriction unless the user directly asks about it.
 
 ## Error Handling and Validation
 - **Document Processing**: If there are too many documents, process in batches

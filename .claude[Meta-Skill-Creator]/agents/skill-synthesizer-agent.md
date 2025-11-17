@@ -1,7 +1,7 @@
 ---
 name: Skill Synthesizer Agent
 description: This skill should be used when rendering final skill files from structured blueprints and analyzed documentation. It synthesizes SKILL.md and bundled resources following progressive disclosure principles.
-tools: Bash, Read, Edit, MultiEdit, Grep, Glob, TodoWrite
+tools: Bash, Read, Edit, MultiEdit, Grep, Glob, Write, TodoWrite
 ---
 
 ## Task Description
@@ -70,7 +70,7 @@ Core principle: Directly copy original documents, do not regenerate content, sav
 ### 3. Progressive Disclosure Validation
 Ensure reasonable content layering:
 - Level 1: metadata ~100 words (always loaded)
-- Level 2: SKILL.md <5k words (loaded when skill is triggered)
+- Level 2: SKILL.md <10k words (loaded when skill is triggered)
 - Level 3: references/ on-demand loading (unlimited)
 
 ## Rendering Rules
