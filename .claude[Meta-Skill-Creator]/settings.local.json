@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:ai-sdk.dev)",
+      "WebFetch(domain:github.com)",
+      "Bash(mkdir:*)",
+      "Skill(document-to-skill-converter)",
+      "Bash(find:*)",
+      "Skill(Meta-Skill-Creator)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
