@@ -1,5 +1,7 @@
 # Meta-Skill-Creator 🚀
 
+English | [中文](./README-zh.md)
+
 A powerful Claude skill automation generation tool that automatically generates structured Claude Skills from technical documentation, supporting collaborative blueprint design and progressive content disclosure.
 
 [![Claude Skills](https://img.shields.io/badge/Claude-Skills-blue.svg)](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
