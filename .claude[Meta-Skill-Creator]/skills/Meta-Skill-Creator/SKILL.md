@@ -1,6 +1,6 @@
 ---
 name: Meta-Skill Creator
-description: A meta-skill for automatically generating structured Claude Skills from technical documentation.
+description: A meta-skill for automatically generating new structured Claude Skills from technical documentation.
 ---
 
 ## General Description
@@ -13,7 +13,7 @@ This skill is the main orchestrator (Architect) and the user's sole interaction 
 - Based on user-provided documentation directory (e.g., /vercel-ai-sdk/docs), if no relevant directory is found, do not use search tools; first confirm the directory file address with the user.
 - If total documentation files exceed 20, stop immediately and reply: "I detected {{actual_count}} files—over the 20-file limit, which dilutes context and hurts SKILL.md quality. Please split into smaller batches (≤15 files each);
 - Collect all `.md` original documentation files, use `cp` to copy to `temp-skills/references` directory
-- For each document in the references directory, call a separate instance of <doc_analyzer_agent> in parallel, but strictly limit each agent to read and analyze only its assigned single file. 
+- For each document in the references directory, call a separate instance of <doc_analyzer_agent> in parallel, but **strictly limit each agent to read and analyze only its assigned single file**. 
 - Generate `all-analyses.json` (summary JSON including summary, toc, key_apis, etc.)
 - Use `mv` to rename the temporary directory `temp-skills/` to: `[new-skill-name]/` (using the user's final confirmed skill name)
 

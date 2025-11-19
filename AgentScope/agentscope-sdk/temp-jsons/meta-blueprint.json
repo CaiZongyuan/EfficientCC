@@ -1,0 +1,55 @@
+{
+  "skill_name": "agentscope-sdk",
+  "skill_description": "This skill should be used when users need to work with AgentScope framework for building AI-powered applications. It provides comprehensive guidance on agent creation, memory management, tool integration, workflow orchestration, and advanced features like RAG, planning, and evaluation.",
+  "output_directory": "agentscope-sdk/",
+  "modules": {
+    "core_agent": {
+      "source_docs": ["task_agent.py", "quickstart_agent.py", "quickstart_key_concept.py", "quickstart_message.py"],
+      "description": "Agent creation, ReActAgent, custom agents, message handling"
+    },
+    "memory_state": {
+      "source_docs": ["task_memory.py", "task_state.py", "task_long_term_memory.py"],
+      "description": "InMemoryMemory, long-term memory, state management, sessions"
+    },
+    "model_integration": {
+      "source_docs": ["task_model.py", "task_embedding.py", "task_token.py"],
+      "description": "Multiple providers (OpenAI, DashScope, Anthropic, etc.), embeddings, token counting"
+    },
+    "tool_systems": {
+      "source_docs": ["task_tool.py", "task_mcp.py"],
+      "description": "Tool functions, toolkit management, MCP integration"
+    },
+    "workflows": {
+      "source_docs": ["workflow_concurrent_agents.py", "workflow_conversation.py", "workflow_handoffs.py", "workflow_routing.py", "workflow_multiagent_debate.py", "task_pipeline.py"],
+      "description": "Concurrent agents, conversations, routing, handoffs, debates, pipelines"
+    },
+    "advanced_features": {
+      "source_docs": ["task_plan.py", "task_rag.py", "task_eval.py", "task_hook.py", "task_prompt.py", "task_studio.py", "task_tracing.py"],
+      "description": "RAG, planning, evaluation, tracing, Studio integration"
+    }
+  },
+  "routing_logic": [
+    {"pattern": ["agent creation", "react agent", "custom agent", "message", "msg"], "route_to": "core_agent"},
+    {"pattern": ["memory", "state", "session", "long-term memory"], "route_to": "memory_state"},
+    {"pattern": ["model", "embedding", "token", "openai", "dashscope", "anthropic", "gemini"], "route_to": "model_integration"},
+    {"pattern": ["tool", "mcp", "toolkit", "function"], "route_to": "tool_systems"},
+    {"pattern": ["workflow", "pipeline", "conversation", "concurrent", "routing", "handoff", "debate"], "route_to": "workflows"},
+    {"pattern": ["rag", "plan", "eval", "trace", "studio", "hook", "prompt"], "route_to": "advanced_features"}
+  ],
+  "progressive_disclosure": {
+    "level1_metadata": true,
+    "level2_skill_md": true,
+    "level3_references": [
+      "task_agent.py", "task_memory.py", "task_state.py", "task_model.py", "task_long_term_memory.py",
+      "task_plan.py", "task_tool.py", "task_pipeline.py", "quickstart_agent.py", "quickstart_key_concept.py",
+      "quickstart_message.py", "task_embedding.py", "task_token.py", "task_tracing.py", "task_studio.py",
+      "task_eval.py", "task_hook.py", "task_rag.py", "task_mcp.py", "task_prompt.py",
+      "workflow_concurrent_agents.py", "workflow_conversation.py", "workflow_handoffs.py", "workflow_routing.py", "workflow_multiagent_debate.py"
+    ]
+  },
+  "skill_structure": {
+    "main_file": "SKILL.md",
+    "references_dir": "references/",
+    "temp_jsons_dir": "temp-jsons/"
+  }
+}
