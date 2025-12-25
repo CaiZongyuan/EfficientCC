@@ -29,9 +29,7 @@ env/
 ENV/
 .venv/
 .env/
-agentscope/
-agentscope-runtime/
-agentscope-samples/
+
 
 .vscode/
 .idea/
@@ -81,5 +79,4 @@ sessions_mount_dir/
 
 local_settings.py
 data/
-
 

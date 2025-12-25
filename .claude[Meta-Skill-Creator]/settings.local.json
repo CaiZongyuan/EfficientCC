@@ -3,7 +3,9 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(find:*)",
-      "Skill(Meta-Skill-Creator)"
+      "Skill(Meta-Skill-Creator)",
+      "Bash(dir:*)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []

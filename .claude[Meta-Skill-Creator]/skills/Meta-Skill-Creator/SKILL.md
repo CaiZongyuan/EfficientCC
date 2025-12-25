@@ -11,7 +11,7 @@ This skill is the main orchestrator (Architect) and the user's sole interaction 
 ### Step 1: Collect Raw Materials
 - Create temporary directory `temp-skills/temp-jsons` to store the generated `all-analyses.json` and `meta-blueprint.json`
 - Based on user-provided documentation directory (e.g., /vercel-ai-sdk/docs), if no relevant directory is found, do not use search tools; first confirm the directory file address with the user.
-- If total documentation files exceed 20, stop immediately and reply: "I detected {{actual_count}} files—over the 20-file limit, which dilutes context and hurts SKILL.md quality. Please split into smaller batches (≤15 files each);
+- If total documentation files exceed 40, stop immediately and reply: "I detected {{actual_count}} files—over the 40-file limit, which dilutes context and hurts SKILL.md quality. Please split into smaller batches (≤15 files each);
 - Collect all `.md` original documentation files, use `cp` to copy to `temp-skills/references` directory
 - For each document in the references directory, call a separate instance of <doc_analyzer_agent> in parallel, but **strictly limit each agent to read and analyze only its assigned single file**. 
 - Generate `all-analyses.json` (summary JSON including summary, toc, key_apis, etc.)
