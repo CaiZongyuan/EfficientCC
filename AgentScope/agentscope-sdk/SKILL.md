@@ -1,98 +1,245 @@
 ---
 name: agentscope-sdk
-description: This skill should be used when users need to work with AgentScope framework for building AI-powered applications. It provides comprehensive guidance on agent creation, memory management, tool integration, workflow orchestration, and advanced features like RAG, planning, and evaluation.
+description: This skill should be used when users need to work with AgentScope, a multi-agent platform for building AI-powered applications. It provides comprehensive guidance on agents, tools, memory management, models, RAG, workflows, evaluation, and development operations.
 ---
 
 # AgentScope SDK
 
+AgentScope is a flexible and easy-to-use multi-agent framework for building LLM-based applications with support for various AI providers. It enables creation of intelligent agents, tool integration, memory management, and multi-agent orchestration through a unified Python interface.
+
 ## Core Functionality
 
-AgentScope SDK provides a comprehensive framework for building AI-powered applications with multi-agent orchestration, memory management, tool integration, and advanced workflow patterns. The framework supports multiple model providers, concurrent execution, and sophisticated agent behaviors through ReAct patterns.
+AgentScope provides a comprehensive platform for building AI-powered multi-agent applications. It supports agent creation with pre-built ReAct agents or custom agent classes, automatic tool schema generation, flexible memory management systems, and multi-provider model integration. The framework includes retrieval-augmented generation capabilities, sophisticated workflow orchestration patterns, evaluation frameworks, and development tools for monitoring and debugging.
 
 ## When to Use
 
-This skill should be used when users need to work with AgentScope framework for building AI-powered applications. It provides comprehensive guidance on agent creation, memory management, tool integration, workflow orchestration, and advanced features like RAG, planning, and evaluation.
+This skill should be used when users need to work with AgentScope, a multi-agent platform for building AI-powered applications. It provides comprehensive guidance on agents, tools, memory management, models, RAG, workflows, evaluation, and development operations.
+
+## Getting Started
+
+Begin with the quickstart tutorials to understand core concepts:
+
+- **Key Concepts**: Refer to `references/quickstart_key_concept.py` for foundational architecture including state management, message handling, tools, agents, and formatters
+- **Message System**: Refer to `references/quickstart_message.py` for creating messages with multimodal content support, tool use handling, and serialization
+- **Agent Basics**: Refer to `references/quickstart_agent.py` for ReAct agent features including realtime steering, parallel tool calls, and structured output
 
 ## Module Overview
 
-### Core Agent Module
-- **Functionality**: Agent creation, ReActAgent, custom agents, message handling, real-time steering, parallel tool calls, and structured output
-- **Key APIs**: ReActAgent, AgentBase, ReActAgentBase, UserAgent, ToolResponse, TextBlock, Msg, DashScopeChatModel, DashScopeChatFormatter, InMemoryMemory, Toolkit
-- **Detailed documentation**: `references/task_agent.py`, `references/quickstart_agent.py`, `references/quickstart_key_concept.py`, `references/quickstart_message.py`
+### Agents Module
+Create and customize agents using ReActAgent or build custom agents from AgentBase. Register agent skills for specialized capabilities.
 
-### Memory & State Module
-- **Functionality**: InMemoryMemory, long-term memory, state management, sessions, persistent storage
-- **Key APIs**: MemoryBase, InMemoryMemory, StateModule, register_state, state_dict, load_state_dict, JSONSession, Mem0LongTermMemory, ReMePersonalLongTermMemory
-- **Detailed documentation**: `references/task_memory.py`, `references/task_state.py`, `references/task_long_term_memory.py`
+- **Key APIs**: ReActAgent, AgentBase, UserAgent, PlanNotebook
+- **Detailed documentation**: `references/task_agent.py`, `references/task_agent_skill.py`, `references/example_react_agent.py`
 
-### Model Integration Module
-- **Functionality**: Multiple providers (OpenAI, DashScope, Anthropic, Gemini, Ollama), embeddings, token counting, streaming responses
-- **Key APIs**: OpenAIChatModel, DashScopeChatModel, AnthropicChatModel, GeminiChatModel, OllamaChatModel, OpenAITextEmbedding, GeminiTextEmbedding, DashScopeTextEmbedding, OpenAITokenCounter
-- **Detailed documentation**: `references/task_model.py`, `references/task_embedding.py`, `references/task_token.py`
+### Tools Module
+Implement tool functions with automatic JSON schema generation, integrate MCP servers, and customize behavior using hooks.
 
-### Tool Systems Module
-- **Functionality**: Tool functions, toolkit management, MCP integration, automatic tool organization
-- **Key APIs**: Toolkit, register_tool_function, call_tool_function, get_json_schemas, HttpStatefulClient, HttpStatelessClient, ToolResponse, execute_python_code
-- **Detailed documentation**: `references/task_tool.py`, `references/task_mcp.py`
+- **Key APIs**: Toolkit, ToolResponse, HttpStatefulClient, StdIOStatefulClient, register_instance_hook
+- **Detailed documentation**: `references/task_tool.py`, `references/task_hook.py`, `references/task_mcp.py`, `references/example_mcp.py`
+
+### Memory Module
+Manage conversation context with short-term and long-term memory systems, including compression strategies for token optimization.
+
+- **Key APIs**: InMemoryMemory, MemoryBase, Mem0LongTermMemory, ReMePersonalLongTermMemory, MemoryWithCompress
+- **Detailed documentation**: `references/task_memory.py`, `references/task_long_term_memory.py`, `references/example_memory_compress.py`
+
+### Models Module
+Integrate multiple LLM providers including OpenAI, DashScope, Anthropic, Gemini, and Ollama with unified interfaces for chat, embeddings, and text-to-speech.
+
+- **Key APIs**: DashScopeChatModel, OpenAIChatModel, AnthropicChatModel, GeminiChatModel, DashScopeTextEmbedding, DashScopeRealtimeTTSModel, OpenAITokenCounter
+- **Detailed documentation**: `references/task_model.py`, `references/task_embedding.py`, `references/task_token.py`, `references/task_tts.py`
+
+### RAG Module
+Build retrieval-augmented generation systems with document readers, vector embeddings, and knowledge base storage.
+
+- **Key APIs**: TextReader, PDFReader, ImageReader, SimpleKnowledge, QdrantStore, DashScopeTextEmbedding, retrieve_knowledge
+- **Detailed documentation**: `references/task_rag.py`, `references/example_rag_basic.py`
+
+### Planning Module
+Enable agents to break down complex tasks into subtasks with manual or agent-managed plan specification and execution tracking.
+
+- **Key APIs**: PlanNotebook, Plan, SubTask
+- **Detailed documentation**: `references/task_plan.py`, `references/example_plan_agent.py`, `references/example_plan_manual.py`
+
+### State Management Module
+Manage agent states with automatic variable registration and session-level persistence.
+
+- **Key APIs**: StateModule, register_state, JSONSession, state_dict, load_state_dict
+- **Detailed documentation**: `references/task_state.py`, `references/task_prompt.py`, `references/task_tracing.py`
+
+### Pipelines Module
+Orchestrate multi-agent workflows with sequential and fanout execution patterns using message broadcasting.
+
+- **Key APIs**: MsgHub, sequential_pipeline, fanout_pipeline, SequentialPipeline, FanoutPipeline
+- **Detailed documentation**: `references/task_pipeline.py`
 
 ### Workflows Module
-- **Functionality**: Concurrent agents, conversations, routing, handoffs, debates, pipelines, message broadcasting
-- **Key APIs**: MsgHub, sequential_pipeline, SequentialPipeline, fanout_pipeline, FanoutPipeline, stream_printing_messages, asyncio.gather, RoutingChoice
-- **Detailed documentation**: `references/workflow_concurrent_agents.py`, `references/workflow_conversation.py`, `references/workflow_handoffs.py`, `references/workflow_routing.py`, `references/workflow_multiagent_debate.py`, `references/task_pipeline.py`
+Implement common multi-agent patterns including concurrent execution, conversations, handoffs, debates, and routing.
 
-### Advanced Features Module
-- **Functionality**: RAG, planning, evaluation, tracing, Studio integration, prompt formatting
-- **Key APIs**: PlanNotebook, TextReader, ImageReader, SimpleKnowledge, QdrantStore, GeneralEvaluator, @trace_llm, @trace_reply, DashScopeMultiAgentFormatter
-- **Detailed documentation**: `references/task_plan.py`, `references/task_rag.py`, `references/task_eval.py`, `references/task_hook.py`, `references/task_prompt.py`, `references/task_studio.py`, `references/task_tracing.py`
+- **Key APIs**: ReActAgent, MsgHub, RoutingChoice, ToolResponse
+- **Detailed documentation**: `references/workflow_concurrent_agents.py`, `references/workflow_conversation.py`, `references/workflow_handoffs.py`, `references/workflow_multiagent_debate.py`, `references/workflow_routing.py`
+
+### Evaluation Module
+Assess agent performance with custom metrics, benchmarks, and evaluators supporting sequential and parallel execution.
+
+- **Key APIs**: BenchmarkBase, MetricBase, GeneralEvaluator, RayEvaluator, ToyBenchmark, CheckEqual
+- **Detailed documentation**: `references/task_eval.py`
+
+### Studio Module
+Monitor and debug agent applications with AgentScope Studio's web interface for visualization and tracing.
+
+- **Key APIs**: agentscope.init, as_studio
+- **Detailed documentation**: `references/task_studio.py`
+
+### Browser Automation Module
+Automate web browsing tasks using Playwright MCP integration with specialized BrowserAgent capabilities.
+
+- **Key APIs**: BrowserAgent, StdIOStatefulClient, ReActAgent
+- **Detailed documentation**: `references/example_browser_agent.py`, `references/example_browser_agent_impl.py`
+
+## Key APIs
+
+**Agent Creation**
+- `ReActAgent`: Pre-built reasoning and acting agent with tool support
+- `AgentBase`: Base class for custom agent implementation
+- `UserAgent`: Specialized agent for user interactions
+
+**Message Management**
+- `Msg`: Message objects with multimodal content support
+- `MsgHub`: Broadcast messages to multiple agents
+- `TextBlock`, `ToolUseBlock`, `ToolResultBlock`: Content block types
+
+**Tool Integration**
+- `Toolkit`: Manage tool functions with automatic schema generation
+- `register_tool_function`: Register Python functions as tools
+- `register_mcp_client`: Integrate MCP servers for external tools
+
+**Memory Systems**
+- `InMemoryMemory`: Short-term conversation memory
+- `Mem0LongTermMemory`: Persistent memory using mem0
+- `MemoryWithCompress`: Automatic memory compression
+
+**Model Integration**
+- `DashScopeChatModel`: Alibaba DashScope LLM integration
+- `OpenAIChatModel`: OpenAI API integration
+- `DashScopeTextEmbedding`: Text embedding generation
+- `OpenAITokenCounter`: Token counting for API usage estimation
+
+**Workflow Orchestration**
+- `sequential_pipeline`: Execute agents in sequence
+- `fanout_pipeline`: Execute agents in parallel
+- `PlanNotebook`: Task planning and subtask management
+
+**State Management**
+- `StateModule`: Base class for stateful agents
+- `JSONSession`: Session persistence with JSON storage
+- `register_state`: Decorator for automatic state registration
+
+## Common Patterns
+
+**Agent Initialization Pattern**
+```python
+agent = ReActAgent(
+    name="assistant",
+    model_config=DashScopeChatModel(),
+    memory=InMemoryMemory(),
+    tools=[...]
+)
+```
+
+**Message Exchange Pattern**
+```python
+msg = Msg(name="user", content="Hello world")
+response = await agent(msg)
+```
+
+**Tool Registration Pattern**
+```python
+toolkit = Toolkit()
+toolkit.register_tool_function(execute_python_code)
+agent = ReActAgent(tools=toolkit.get_json_schemas())
+```
+
+**Pipeline Execution Pattern**
+```python
+async with MsgHub("hub") as hub:
+    await sequential_pipeline([agent1, agent2], hub)
+```
+
+**State Management Pattern**
+```python
+class MyStatefulAgent(StateModule):
+    def __init__(self):
+        super().__init__()
+        self.register_state("counter", 0)
+```
+
+**MCP Integration Pattern**
+```python
+client = HttpStatefulClient("http://localhost:8000/sse")
+toolkit.register_mcp_client(client)
+```
 
 ## Workflow
 
-1. **Set up AgentScope environment**:
-   - Install agentscope package: `pip install agentscope`
-   - Set up API keys as environment variables (e.g., `DASHSCOPE_API_KEY`)
-   - Initialize AgentScope with `agentscope.init()`
+1. **Initialize AgentScope** with model configuration and API keys
+2. **Create agents** using ReActAgent or custom AgentBase subclasses
+3. **Register tools** via Toolkit or integrate MCP servers for external capabilities
+4. **Configure memory** with InMemoryMemory for short-term or long-term memory classes
+5. **Orchestrate workflows** using pipelines, MsgHub, or custom coordination logic
+6. **Monitor execution** through AgentScope Studio for debugging and visualization
 
-2. **Create basic agents**:
-   - Use ReActAgent for reasoning and acting capabilities
-   - Configure with model, memory, formatter, and toolkit
-   - Reference `references/task_agent.py` for detailed agent creation patterns
-
-3. **Implement memory and state management**:
-   - Add InMemoryMemory for conversation history
-   - Use StateModule for persistent state management
-   - Consider long-term memory integration with mem0 or ReMe
-   - Reference `references/task_memory.py` and `references/task_state.py` when complex memory patterns are needed
-
-4. **Integrate tools and model providers**:
-   - Register tool functions with Toolkit
-   - Configure multiple model providers (OpenAI, DashScope, Anthropic, etc.)
-   - Set up embeddings for RAG applications
-   - Reference `references/task_tool.py` and `references/task_model.py` for advanced tool integration
-
-5. **Design workflows and agent orchestration**:
-   - Use MsgHub for multi-agent communication
-   - Implement routing patterns for agent selection
-   - Create pipelines for sequential processing
-   - Reference `references/workflow_routing.py` and `references/task_pipeline.py` for complex workflow patterns
-
-6. **Add advanced features when needed**:
-   - Implement RAG with TextReader and vector stores
-   - Add planning capabilities with PlanNotebook
-   - Set up evaluation frameworks
-   - Enable tracing and monitoring
-   - Reference specific documentation in `references/` directory for each feature
-
-7. **Common patterns and best practices**:
-   - Use async/await patterns for concurrent operations
-   - Implement proper error handling with try/catch blocks
-   - Use structured output with Pydantic models for consistency
-   - Apply progressive disclosure in complex applications
-   - Reference `references/quickstart_key_concept.py` for fundamental patterns
+Refer to detailed documentation in `references/` directory for specific implementation patterns and advanced configurations.
 
 ## Resource References
 
-- **For detailed API specifications**: `references/task_agent.py`, `references/task_model.py`, `references/task_tool.py`
-- **For code examples and templates**: `references/quickstart_agent.py`, `references/quickstart_message.py`
-- **For complex workflows**: `references/workflow_conversation.py`, `references/workflow_routing.py`, `references/task_pipeline.py`
-- **For advanced features**: `references/task_rag.py`, `references/task_plan.py`, `references/task_eval.py`
-- **For development tools**: `references/task_studio.py`, `references/task_tracing.py`, `references/task_hook.py`
+**Quick Start**
+- `references/quickstart_agent.py` - Agent basics with ReActAgent
+- `references/quickstart_key_concept.py` - Core architecture concepts
+- `references/quickstart_message.py` - Message system overview
+
+**Agent Development**
+- `references/task_agent.py` - Agent initialization and planning
+- `references/task_agent_skill.py` - Agent skill registration
+- `references/example_react_agent.py` - Custom agent examples
+
+**Tool Integration**
+- `references/task_tool.py` - Tool function implementation
+- `references/task_mcp.py` - MCP server integration
+- `references/task_hook.py` - Lifecycle hooks for customization
+
+**Memory Management**
+- `references/task_memory.py` - Short-term memory usage
+- `references/task_long_term_memory.py` - Persistent memory systems
+- `references/example_memory_compress.py` - Memory compression strategies
+
+**Model Integration**
+- `references/task_model.py` - Multi-provider LLM integration
+- `references/task_embedding.py` - Text and multimodal embeddings
+- `references/task_token.py` - Token counting for cost estimation
+- `references/task_tts.py` - Text-to-speech capabilities
+
+**RAG Implementation**
+- `references/task_rag.py` - Comprehensive RAG guide
+- `references/example_rag_basic.py` - Basic RAG example
+
+**Workflow Patterns**
+- `references/workflow_conversation.py` - User-agent and multi-agent conversations
+- `references/workflow_routing.py` - Query routing to specialized agents
+- `references/workflow_handoffs.py` - Orchestrator-worker delegation
+- `references/workflow_concurrent_agents.py` - Parallel agent execution
+- `references/workflow_multiagent_debate.py` - Consensus through debate
+
+**State Management**
+- `references/task_state.py` - State module usage
+- `references/task_prompt.py` - Message formatting for LLM providers
+- `references/task_tracing.py` - OpenTelemetry tracing setup
+
+**Evaluation and Monitoring**
+- `references/task_eval.py` - Agent evaluation framework
+- `references/task_studio.py` - Studio deployment and usage
+
+**Advanced Examples**
+- `references/example_browser_agent.py` - Browser automation with Playwright
+- `references/example_plan_agent.py` - Planning with ReActAgent
+- `references/example_plan_manual.py` - Manual plan specification

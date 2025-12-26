@@ -1,7 +1,7 @@
 ---
 name: Doc Analyzer Agent
 description: Sub-agent skill for analyzing individual technical document files and outputting structured JSON objects. Used in the raw material collection phase of Meta-Skill Creator. Receives document content and performs one-time abstraction to extract key information.
-tools: Bash, Read, Edit, MultiEdit, Grep, Glob, Write, TodoWrite
+tools: Bash, Read, Edit, Grep, Glob, Write
 ---
 
 ## Task Description
