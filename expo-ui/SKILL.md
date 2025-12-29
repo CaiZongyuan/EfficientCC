@@ -207,19 +207,41 @@ import { Button, Host } from '@expo/ui/swift-ui';
 </Host>
 ```
 
-**Variants:** default, bordered, borderless, borderedProminent, plain
+**Props:**
+- `onPress?: () => void` - Callback when button is pressed
+- `systemImage?: SFSymbol` - SF Symbol name (only used if children is a string)
+- `role?: 'default' | 'cancel' | 'destructive'` - Button role (iOS only)
+- `controlSize?: 'mini' | 'small' | 'regular' | 'large' | 'extraLarge'` - Control size
+- `variant?: ButtonVariant` - Button style variant
+- `children?: string | React.ReactNode` - Button content
+- `color?: string` - Button color
+- `disabled?: boolean` - Disabled state
+
+**Variants:** default, bordered, borderless, borderedProminent, plain, glass, glassProminent, accessoryBar, accessoryBarAction, card, link
 
 #### Text
+
+**Platform:** iOS, macOS, tvOS
 
 ```jsx
 import { Text, Host } from '@expo/ui/swift-ui';
 
 <Host>
-  <Text size={24} color="primary">
+  <Text size={24} weight="bold" color="primary">
     Hello, world!
   </Text>
 </Host>
 ```
+
+**Props:**
+- `children: string` - Text content (must be a string, not React.ReactNode)
+- `size?: number` - Font size
+- `weight?: 'ultraLight' | 'thin' | 'light' | 'regular' | 'medium' | 'semibold' | 'bold' | 'heavy' | 'black'` - Font weight
+- `design?: 'default' | 'rounded' | 'serif' | 'monospaced'` - Font design
+- `lineLimit?: number` - Maximum number of lines
+- `color?: string` - Text color
+
+**Important:** Text children must be a string. Use individual `size` and `weight` props instead of a `font` object.
 
 #### Image
 
@@ -466,7 +488,7 @@ import { padding, frame, background, clipShape } from '@expo/ui/swift-ui/modifie
 - `foregroundStyle(color)` - Set foreground color
 - `clipShape(shape)` - Clip to shape (roundedRectangle, circle, capsule)
 - `cornerRadius(radius)` - Round corners
-- `font({ size, weight, design })` - Font styling
+- `font({ size, weight, design })` - Font styling (Note: Text component uses individual props: `size`, `weight`, `design`)
 
 **Behavior modifiers:**
 - `disabled(bool)` - Enable/disable interaction
@@ -480,6 +502,8 @@ import { padding, frame, background, clipShape } from '@expo/ui/swift-ui/modifie
 import { glassEffect, glassEffectId, animation, Animation } from '@expo/ui/swift-ui/modifiers';
 
 <Text
+  size={16}
+  weight="medium"
   modifiers={[
     padding({ all: 16 }),
     glassEffect({
