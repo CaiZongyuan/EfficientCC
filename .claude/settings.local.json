@@ -3,7 +3,8 @@
     "allow": [
       "Skill(Meta-Skill-Creator)",
       "Bash(mkdir:*)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(ls:*)"
     ]
   }
 }
